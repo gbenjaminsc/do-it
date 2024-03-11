@@ -8,7 +8,13 @@ import {
   InputGroup,
 } from "@chakra-ui/react";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import {
+  useState,
+  useEffect,
+  useCallback,
+  ForwardRefRenderFunction,
+  forwardRef,
+} from "react";
 import { IconType } from "react-icons";
 import { FieldError } from "react-hook-form";
 
@@ -30,16 +36,12 @@ const inputVariantion: inputVariationOption = {
   filled: "green.500",
 };
 
-export const Input = ({
-  name,
-  error = null,
-  icon: Icon,
-  label,
-  ...rest
-}: InputProps) => {
+const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
+  { name, error = null, icon: Icon, label, ...rest },
+  ref
+) => {
+  const [value, setValue] = useState("");
   const [variation, setVariation] = useState("default");
-
-  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (error) {
@@ -54,10 +56,10 @@ export const Input = ({
   }, [error]);
 
   const handleInputBlur = useCallback(() => {
-    if (inputRef.current?.value && !error) {
+    if (value.length > 1 && !error) {
       return setVariation("filled");
     }
-  }, [error]);
+  }, [error, value]);
 
   return (
     <FormControl isInvalid={!!error}>
@@ -69,17 +71,20 @@ export const Input = ({
           </InputLeftElement>
         )}
         <ChakraInput
+          id={name}
           name={name}
-          bg="gray.50"
-          color={inputVariantion[variation]}
-          borderColor={inputVariantion[variation]}
-          variant="outline"
-          onFocus={handleInputFocus}
+          onChangeCapture={(e) => setValue(e.currentTarget.value)}
           onBlurCapture={handleInputBlur}
+          onFocus={handleInputFocus}
+          borderColor={inputVariantion[variation]}
+          color={inputVariantion[variation]}
+          bg="gray.50"
+          variant="outline"
           _hover={{ bgColor: "gray.100" }}
           _placeholder={{ color: "gray.300" }}
           size="lg"
           h="60px"
+          ref={ref}
           {...rest}
         />
 
@@ -88,3 +93,5 @@ export const Input = ({
     </FormControl>
   );
 };
+
+export const Input = forwardRef(InputBase);

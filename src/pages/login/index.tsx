@@ -1,15 +1,43 @@
-import { Flex, Grid, Heading, Image, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  Heading,
+  Image,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import LogoSecondary from "../../assets/main-logo.svg";
 import { Input } from "../../components/form/input";
 import { useForm } from "react-hook-form";
 import { FaEnvelope, FaLock } from "react-icons/fa";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
+
+const signInSchema = yup.object().shape({
+  email: yup.string().required("Email obrigatório ").email("Email inválido"),
+  password: yup.string().required("Senha obrigatória"),
+});
+
+interface SignInData {
+  email: string;
+  password: string;
+}
 
 export const Login = () => {
+  const [loading, setLoading] = useState(false);
+
   const {
     formState: { errors },
     register,
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(signInSchema),
+  });
+
+  const handleSignIn = (data: SignInData) => console.log(data);
 
   return (
     <Flex
@@ -34,6 +62,7 @@ export const Login = () => {
           </Text>
         </Grid>
         <Grid
+          onSubmit={handleSubmit(handleSignIn)}
           as="form"
           mt="4"
           w="50%"
@@ -45,12 +74,55 @@ export const Login = () => {
         >
           <Heading size="lg">Bem vindo de volta!</Heading>
           <VStack mt="6" spacing="5">
+            <Box w="100%">
+              <Input
+                type="email"
+                placeholder="Digite seu login"
+                label="Login"
+                error={errors.email}
+                icon={FaEnvelope}
+                {...register("email")}
+              />
+              {!errors.email && (
+                <Text ml="1" mt="1" color="gray.300">
+                  Exemplo: nome@email.com
+                </Text>
+              )}
+            </Box>
             <Input
-              placeholder="Digite seu login"
-              icon={FaEnvelope}
-              name="email"
+              type="password"
+              placeholder="Digite sua senha"
+              label="Senha"
+              error={errors.password}
+              icon={FaLock}
+              {...register("password")}
             />
-            <Input placeholder="Digite sua senha" icon={FaLock} {...register("password")} />
+          </VStack>
+          <VStack mt="4" spacing="5">
+            <Button
+              isLoading={loading}
+              bg="purple.800"
+              w="100%"
+              color="white"
+              h="60px"
+              borderRadius="8px"
+              _hover={{ background: "purple.900" }}
+              type="submit"
+            >
+              Entrar
+            </Button>
+            <Text color="gray.400">Ainda não possui uma conta?</Text>
+            <Button
+              isLoading={loading}
+              bg="gray.100"
+              w="100%"
+              color="gray.300"
+              h="60px"
+              borderRadius="8px"
+              _hover={{ background: "gray.200" }}
+            >
+              Cadastrar
+            </Button>
           </VStack>
         </Grid>
       </Flex>
