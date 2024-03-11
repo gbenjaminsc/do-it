@@ -36,7 +36,7 @@ export const Login = () => {
         <Grid
           as="form"
           mt="4"
-          w="100%"
+          w="50%"
           padding="30px 15px"
           border="3px solid"
           borderColor="gray.100"
