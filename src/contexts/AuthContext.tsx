@@ -29,8 +29,9 @@ interface SignInCredentials {
 
 interface AuthContextData {
   user: User;
-  accesstoken: string;
+  accessToken: string;
   signIn: (credentials: SignInCredentials) => Promise<void>;
+  signOut: () => void;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -63,11 +64,25 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
     localStorage.setItem("@Doit:accessToken", accessToken);
     localStorage.setItem("@Doit:user", JSON.stringify(user));
+
     setData({ accessToken, user });
   }, []);
+
+  const signOut = useCallback(() => {
+    localStorage.removeItem("@Doit:accessToken");
+    localStorage.removeItem("@Doit:user");
+
+    setData({} as AuthState);
+  }, []);
+
   return (
     <AuthContext.Provider
-      value={{ accesstoken: data.accessToken, user: data.user, signIn }}
+      value={{
+        accessToken: data.accessToken,
+        user: data.user,
+        signIn,
+        signOut,
+      }}
     >
       {children}
     </AuthContext.Provider>
