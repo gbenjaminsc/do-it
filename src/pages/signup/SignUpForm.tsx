@@ -33,7 +33,7 @@ export const SignUpForm = ({
       onSubmit={handleSignUp}
       as="form"
       mt={["4", "4", "0"]}
-      padding="30px 15px"
+      padding="40px 25px"
       border="3px solid"
       borderColor="gray.100"
       borderRadius="8"
@@ -98,6 +98,7 @@ export const SignUpForm = ({
         </Button>
         <Text color="gray.400">Ainda não possui uma conta?</Text>
         <Button
+          mt="8"
           isLoading={loading}
           bg="gray.100"
           w="100%"
