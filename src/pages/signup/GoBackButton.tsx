@@ -8,8 +8,7 @@ interface GoBackButtonProps {
 }
 
 export const GoBackButton = ({ top, left }: GoBackButtonProps) => {
-
-    const history = useHistory()
+  const history = useHistory();
   return (
     <Center
       as="button"
@@ -22,7 +21,7 @@ export const GoBackButton = ({ top, left }: GoBackButtonProps) => {
       fontSize="2xl"
       borderRadius="md"
       _hover={{ bg: "purple.600" }}
-      onClick={()=> history.push("/")}
+      onClick={() => history.push("/")}
     >
       <FaArrowLeft color={theme.colors.white} />
     </Center>

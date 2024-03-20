@@ -1,6 +1,6 @@
 import { Box, Button, Grid, Heading, Text, VStack } from "@chakra-ui/react";
 import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
-import { Input } from "../../components/form/input";
+import { Input } from "../../components/Form/input";
 import {
   DeepMap,
   FieldError,
@@ -41,11 +41,11 @@ export const SignUpForm = ({
       color="gray.900"
       w={["100%", "100%", "40%", "40%"]}
     >
-      <Heading size="lg">Bem vindo de volta!</Heading>
+      <Heading size="lg">Crie sua conta</Heading>
       <VStack mt="6" spacing="5">
         <Box w="100%">
           <Input
-            type="email"
+            type="name"
             placeholder="Digite seu nome"
             label="Nome"
             error={errors.name}
@@ -94,20 +94,7 @@ export const SignUpForm = ({
           _hover={{ background: "purple.900" }}
           type="submit"
         >
-          Entrar
-        </Button>
-        <Text color="gray.400">Ainda não possui uma conta?</Text>
-        <Button
-          mt="8"
-          isLoading={loading}
-          bg="gray.100"
-          w="100%"
-          color="gray.300"
-          h="60px"
-          borderRadius="8px"
-          _hover={{ background: "gray.200" }}
-        >
-          Cadastrar
+          Finalizar cadastro
         </Button>
       </VStack>
     </Grid>
