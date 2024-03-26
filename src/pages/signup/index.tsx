@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
 import { SignUpInfo } from "./SignUpInfo";
 import { SignUpForm } from "./SignUpForm";
 import { GoBackButton } from "./GoBackButton";
@@ -25,12 +24,11 @@ interface SignUpData {
   email: string;
   password: string;
   name: string;
+  confirm_password: string;
 }
 
 export const SignUp = () => {
   const [loading, setLoading] = useState(false);
-
-  const { signIn } = useAuth();
 
   const {
     formState: { errors },

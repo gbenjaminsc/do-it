@@ -80,7 +80,7 @@ export const SignUpForm = ({
           label="Confirmação de senha"
           error={errors.confirm_password}
           icon={FaLock}
-          {...register("confirm_paassword")}
+          {...register("confirm_password")}
         />
       </VStack>
       <VStack mt="4" spacing="5">
