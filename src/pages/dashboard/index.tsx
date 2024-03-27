@@ -1,8 +1,13 @@
-import { Button } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import { useAuth } from "../../contexts/AuthContext";
+import { Header } from "../../components/Header";
 
 export const Dashboard = () => {
   const { signOut } = useAuth();
 
-  return <Button onClick={signOut}>Deslogar</Button>;
+  return (
+    <Box>
+      <Header />
+    </Box>
+  );
 };
