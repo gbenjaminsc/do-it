@@ -1,4 +1,4 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useAuth } from "../../contexts/AuthContext";
 import { Header } from "../../components/Header";
 
