@@ -76,7 +76,7 @@ export const SignUp = () => {
       <ModalSuccess
         buttonMessage="Ir para o login agora"
         message="Seu cadastro deu super certo, <b>vamos lá</b>"
-        onClick={() => history.push('/')}
+        onClick={() => history.push("/")}
         secondaryText="Você já pode começar criando <b>suas listas</b> de tarefas agora mesmo..."
         isOpen={isModalSuccessOpen}
         onClose={onModalSuccessClose}
@@ -85,6 +85,7 @@ export const SignUp = () => {
         error="Seu email já está em uso"
         isOpen={isModalErrorOpen}
         onClose={onModalErrorClose}
+        secondaryText="Você  já pode tentar novamente, <b>clicando</b> no botão acima ou aguarde alguns minutos..."
       />
       <Flex
         padding={["0px", "0px", "10px 15px", "10px 15px"]}
