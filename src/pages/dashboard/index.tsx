@@ -1,7 +1,7 @@
 import { Box, Grid } from "@chakra-ui/react";
 import { useAuth } from "../../contexts/AuthContext";
 import { Header } from "../../components/Header";
-import { SearchBox } from "../../components/Form/SerchBox";
+import { SearchBox } from "../../components/Form/SearchBox";
 import { Card } from "../../components/Card";
 
 export const Dashboard = () => {
