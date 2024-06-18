@@ -43,6 +43,7 @@ export const ModalCreateTask = ({ isOpen, onClose }: ModalCreateTaskProps) => {
     formState: { errors },
     register,
     handleSubmit,
+    reset,
   } = useForm({
     resolver: yupResolver(createTaskSchema),
   });
@@ -53,7 +54,15 @@ export const ModalCreateTask = ({ isOpen, onClose }: ModalCreateTaskProps) => {
 
   const handleCreateTask = (data: TaskData) => {
     const newData = { ...data, userId: user.id, completed: false };
-    createTask(newData, accessToken).then((res) => onClose());
+    createTask(newData, accessToken).then((res) => {
+      reset();
+      onClose();
+    });
+  };
+
+  const handleClose = () => {
+    reset();
+    onClose();
   };
 
   return (
@@ -75,7 +84,7 @@ export const ModalCreateTask = ({ isOpen, onClose }: ModalCreateTaskProps) => {
               Adicionar
             </Text>
             <Center
-              onClick={onClose}
+              onClick={handleClose}
               as="button"
               ml="auto"
               w="32px"
