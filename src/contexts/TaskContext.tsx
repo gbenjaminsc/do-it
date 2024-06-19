@@ -125,7 +125,7 @@ const TaskProvider = ({ children }: TaskProviderProps) => {
 
       if (!response.data.length) {
         setTaskNotFound(taskTitle);
-        setNotFound(true);
+        return setNotFound(true);
       }
 
       setNotFound(false);
